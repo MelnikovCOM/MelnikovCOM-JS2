@@ -27,8 +27,7 @@ class List {
   render() {
     const block = document.querySelector(this.container);
     for (let product of this.goods) {
-      //console.log(this.constructor.name);
-      const productObj = new this.list[this.constructor.name](product); //мы сделали объект товара либо CartItem, либо ProductItem
+      const productObj = new this.list[this.constructor.name](product);
       console.log(productObj);
       this.allProducts.push(productObj);
       block.insertAdjacentHTML("beforeend", productObj.render());
@@ -47,7 +46,6 @@ class Item {
     this.img = img;
   }
   render() {
-    //генерация товара для каталога товаров
     return `<div class="product-item" data-id="${this.id_product}">
                 <img src="${this.img}" alt="Some img">
                 <div class="desc">
@@ -66,12 +64,11 @@ class ProductsList extends List {
   constructor(cart, container = ".products", url = "/catalogData.json") {
     super(url, container);
     this.cart = cart;
-    this.getJson().then((data) => this.handleData(data)); //handleData запускает отрисовку либо каталога товаров, либо списка товаров корзины
+    this.getJson().then((data) => this.handleData(data));
   }
   _init() {
     document.querySelector(this.container).addEventListener("click", (e) => {
       if (e.target.classList.contains("buy-btn")) {
-        //                console.log(e.target);
         this.cart.addProduct(e.target);
       }
     });
@@ -84,7 +81,7 @@ class Cart extends List {
   constructor(container = ".cart-block", url = "/getBasket.json") {
     super(url, container);
     this.getJson().then((data) => {
-      this.handleData(data.contents); //вывели все товары в корзине
+      this.handleData(data.contents);
     });
   }
   addProduct(element) {
