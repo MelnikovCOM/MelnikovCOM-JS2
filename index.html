@@ -2,30 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Интернет магазин</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div>
-      <header class="home">
-        <div class="home-btn container">
-          <h1 class="home-text">Интернет магазин</h1>
-          <button class="btn-cart" type="button">Корзина</button>
+    <div id="app">
+      <header>
+        <div class="logo">E-shop</div>
+        <div class="cart">
+          <search></search>
+
+          <button class="btn-cart" type="button" @click="showCart = !showCart">
+            Корзина
+          </button>
+
+          <cart
+            :cart-items="cartItems"
+            :img="imgCart"
+            :visibility="showCart"
+          ></cart>
         </div>
       </header>
-      <main class="product-fon">
-        <div class="container">
-          <div class="products"></div>
-        </div>
+      <main>
+        <products
+          :products="filtered"
+          :img="imgProduct"
+          @add-product="addProduct"
+        ></products>
       </main>
-      <footer class="homes">
-        <div class="container">
-          <h2 class="homes-text">ЖДЕМ ВАС СНОВА!</h2>
-        </div>
-      </footer>
     </div>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+      integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/ProductComponent.js"></script>
+    <script src="js/CartComponent.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
